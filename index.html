@@ -8,88 +8,277 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
  margin:0;
  font-family:system-ui,-apple-system,Segoe UI,sans-serif;
  background:#f1f5f9;
  color:#172033
 }
-.app{max-width:520px;margin:auto;background:#f8fafc;min-height:100vh}
+
+.app{
+ max-width:520px;
+ margin:auto;
+ background:#f8fafc;
+ min-height:100vh
+}
+
 header{
  background:linear-gradient(135deg,#0f766e,#115e59);
- color:white;padding:20px 16px;border-radius:0 0 24px 24px
+ color:white;
+ padding:20px 16px;
+ border-radius:0 0 24px 24px
 }
-h1{margin:4px 0;font-size:28px}
-.sub{opacity:.9;font-size:14px}
-main{padding:14px 14px 85px}
+
+h1{
+ margin:4px 0;
+ font-size:28px
+}
+
+.sub{
+ opacity:.9;
+ font-size:14px
+}
+
+main{
+ padding:14px 14px 90px
+}
+
 .card{
- background:white;border-radius:18px;padding:16px;margin-bottom:14px;
- box-shadow:0 4px 16px #0000000d;border:1px solid #e5e7eb
+ background:white;
+ border-radius:18px;
+ padding:16px;
+ margin-bottom:14px;
+ box-shadow:0 4px 16px #0000000d;
+ border:1px solid #e5e7eb
 }
+
 .goal{
- display:flex;justify-content:space-between;align-items:center;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
  gap:10px
 }
-.goalMoney{font-size:30px;font-weight:800;color:#0f766e}
-.small{font-size:13px;color:#64748b}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
-.stat{
- background:#f0fdfa;border-radius:12px;padding:10px;text-align:center
+
+.goalMoney{
+ font-size:30px;
+ font-weight:800;
+ color:#0f766e
 }
-.stat b{display:block;font-size:20px;color:#0f766e}
+
+.small{
+ font-size:13px;
+ color:#64748b
+}
+
+.stats{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:8px;
+ margin-top:12px
+}
+
+.stat{
+ background:#f0fdfa;
+ border-radius:12px;
+ padding:10px;
+ text-align:center
+}
+
+.stat b{
+ display:block;
+ font-size:20px;
+ color:#0f766e
+}
+
 .progress{
- height:13px;background:#e2e8f0;border-radius:20px;overflow:hidden;
+ height:13px;
+ background:#e2e8f0;
+ border-radius:20px;
+ overflow:hidden;
  margin-top:10px
 }
+
 #bar{
- height:100%;width:0%;background:#0f766e;
- transition:.3s
+ height:100%;
+ width:0%;
+ background:#0f766e;
+ transition:.4s
 }
+
 .mission{
- display:flex;align-items:center;gap:10px;
- padding:12px;margin:9px 0;background:#f8fafc;
- border-radius:14px;border:1px solid #e2e8f0
+ display:flex;
+ align-items:center;
+ gap:10px;
+ padding:12px;
+ margin:9px 0;
+ background:#f8fafc;
+ border-radius:14px;
+ border:1px solid #e2e8f0
 }
-.mission input{width:20px;height:20px}
-.done{text-decoration:line-through;opacity:.55}
+
+.mission input{
+ width:20px;
+ height:20px
+}
+
+.done{
+ text-decoration:line-through;
+ opacity:.55
+}
+
 button{
- border:0;border-radius:12px;padding:12px 14px;
- font-size:15px;font-weight:700;background:#0f766e;color:white;
+ border:0;
+ border-radius:12px;
+ padding:12px 14px;
+ font-size:15px;
+ font-weight:700;
+ background:#0f766e;
+ color:white;
  cursor:pointer
 }
-button.secondary{background:#e2e8f0;color:#172033}
-.row{display:flex;gap:8px}
-.row button{flex:1}
+
+button.secondary{
+ background:#e2e8f0;
+ color:#172033
+}
+
+button.danger{
+ background:#fee2e2;
+ color:#991b1b
+}
+
+.row{
+ display:flex;
+ gap:8px
+}
+
+.row button{
+ flex:1
+}
+
 textarea,input,select{
- width:100%;padding:12px;border:1px solid #cbd5e1;
- border-radius:12px;font-size:15px;background:white
+ width:100%;
+ padding:12px;
+ border:1px solid #cbd5e1;
+ border-radius:12px;
+ font-size:15px;
+ background:white
 }
-textarea{min-height:90px;resize:vertical}
+
+textarea{
+ min-height:90px;
+ resize:vertical
+}
+
 .chat{
- display:flex;flex-direction:column;gap:8px;
- max-height:360px;overflow:auto;margin-bottom:10px
+ display:flex;
+ flex-direction:column;
+ gap:8px;
+ max-height:360px;
+ overflow:auto;
+ margin-bottom:10px
 }
-.msg{padding:11px 13px;border-radius:14px;max-width:92%;line-height:1.45}
-.msg.ai{background:#ecfdf5;align-self:flex-start}
-.msg.user{background:#0f766e;color:white;align-self:flex-end}
+
+.msg{
+ padding:11px 13px;
+ border-radius:14px;
+ max-width:92%;
+ line-height:1.45;
+ word-wrap:break-word
+}
+
+.msg.ai{
+ background:#ecfdf5;
+ align-self:flex-start
+}
+
+.msg.user{
+ background:#0f766e;
+ color:white;
+ align-self:flex-end
+}
+
 .pill{
- display:inline-block;background:#ccfbf1;color:#115e59;
- padding:5px 9px;border-radius:20px;font-size:12px;font-weight:700
+ display:inline-block;
+ background:#ccfbf1;
+ color:#115e59;
+ padding:5px 9px;
+ border-radius:20px;
+ font-size:12px;
+ font-weight:700
 }
-.hidden{display:none}
+
+.hidden{
+ display:none
+}
+
 nav{
- position:fixed;bottom:0;left:50%;transform:translateX(-50%);
- max-width:520px;width:100%;background:white;
- display:grid;grid-template-columns:repeat(3,1fr);
- padding:8px;border-top:1px solid #e2e8f0
+ position:fixed;
+ bottom:0;
+ left:50%;
+ transform:translateX(-50%);
+ max-width:520px;
+ width:100%;
+ background:white;
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ padding:8px;
+ border-top:1px solid #e2e8f0;
+ z-index:10
 }
-nav button{background:white;color:#64748b}
-nav button.active{color:#0f766e;background:#ecfdf5}
-.status{font-size:12px;color:#64748b;margin-top:8px}
+
+nav button{
+ background:white;
+ color:#64748b
+}
+
+nav button.active{
+ color:#0f766e;
+ background:#ecfdf5
+}
+
+.status{
+ font-size:12px;
+ color:#64748b;
+ margin-top:8px
+}
+
+.planItem{
+ padding:10px;
+ margin:7px 0;
+ background:#f8fafc;
+ border-radius:12px;
+ border-left:4px solid #0f766e
+}
+
+.streakBox{
+ margin-top:12px;
+ padding:12px;
+ background:#fff7ed;
+ border-radius:14px;
+ text-align:center
+}
+
+.bigStreak{
+ font-size:28px;
+ font-weight:800
+}
+
+.loading{
+ opacity:.7
+}
+
+hr{
+ border:0;
+ border-top:1px solid #e2e8f0;
+ margin:16px 0
+}
 </style>
 </head>
 
 <body>
+
 <div class="app">
 
 <header>
@@ -100,153 +289,341 @@ nav button.active{color:#0f766e;background:#ecfdf5}
 
 <main>
 
+<!-- HOME -->
+
 <section id="home">
 
 <div class="card">
+
  <span class="pill">🎯 आज का लक्ष्य</span>
+
  <div class="goal">
+
   <div>
-   <div class="goalMoney">₹<span id="goalShow">500</span></div>
-   <div class="small">आज कमाई का लक्ष्य</div>
+   <div class="goalMoney">
+    ₹<span id="goalShow">500</span>
+   </div>
+
+   <div class="small">
+    आज कमाई का लक्ष्य
+   </div>
   </div>
+
   <div style="text-align:right">
    <b id="streak">🔥 1</b>
    <div class="small">Day Streak</div>
   </div>
+
  </div>
 
  <div class="stats">
-  <div class="stat"><b id="percent">0%</b><span class="small">Progress</span></div>
-  <div class="stat"><b id="hoursShow">3h</b><span class="small">Available</span></div>
-  <div class="stat"><b id="roleShow">Job</b><span class="small">Role</span></div>
+
+  <div class="stat">
+   <b id="percent">0%</b>
+   <span class="small">Progress</span>
+  </div>
+
+  <div class="stat">
+   <b id="hoursShow">3h</b>
+   <span class="small">Available</span>
+  </div>
+
+  <div class="stat">
+   <b id="roleShow">Job</b>
+   <span class="small">Role</span>
+  </div>
+
  </div>
 
- <div class="progress"><div id="bar"></div></div>
+ <div class="progress">
+  <div id="bar"></div>
+ </div>
+
 </div>
 
+
+<!-- SMART PLAN -->
+
 <div class="card">
- <h3>📋 आज का Smart Plan</h3>
+
+ <h3>🧠 आज का Smart Plan</h3>
+
  <div id="smartPlan"></div>
- <button onclick="refreshPlan()">🔄 Plan Refresh</button>
+
+ <button onclick="refreshPlan()">
+  🔄 Plan Refresh
+ </button>
+
 </div>
 
+
+<!-- MISSIONS -->
+
 <div class="card">
+
  <h3>✅ आज के 3 Missions</h3>
+
  <div id="missions"></div>
+
+ <div id="missionStatus" class="status">
+  आज के missions शुरू करें।
+ </div>
+
 </div>
 
+
+<!-- STREAK -->
+
 <div class="card">
+
+ <h3>🔥 Daily Streak</h3>
+
+ <div class="streakBox">
+
+  <div class="bigStreak" id="streakBig">
+   🔥 1 दिन
+  </div>
+
+  <div class="small">
+   रोज़ अपने missions पूरे करके streak बनाए रखें।
+  </div>
+
+ </div>
+
+</div>
+
+
+<!-- CHAT -->
+
+<div class="card">
+
  <h3>💬 AI Saathi से बात करें</h3>
 
  <div id="chat" class="chat">
+
   <div class="msg ai">
    नमस्ते! 🙏 मैं आपका AI Saathi हूँ।<br>
    आज के काम, job, skill या earning plan में मदद कर सकता हूँ।
   </div>
+
  </div>
 
- <textarea id="question"
- placeholder="जैसे: आज मुझे कौन सा काम पहले करना चाहिए?"></textarea>
+ <textarea
+  id="question"
+  placeholder="जैसे: आज मुझे कौन सा काम पहले करना चाहिए?"
+ ></textarea>
 
  <div class="row">
-  <button onclick="ask()">🤖 AI से पूछें</button>
-  <button class="secondary" onclick="speak()">🔊 सुनें</button>
+
+  <button onclick="ask()">
+   🤖 AI से पूछें
+  </button>
+
+  <button class="secondary" onclick="speak()">
+   🔊 सुनें
+  </button>
+
  </div>
 
- <div id="status" class="status">AI Saathi तैयार है।</div>
+ <br>
+
+ <button
+  class="secondary"
+  style="width:100%"
+  onclick="clearChat()">
+  🗑️ Chat Clear करें
+ </button>
+
+ <div id="status" class="status">
+  AI Saathi तैयार है।
+ </div>
+
 </div>
 
 </section>
+
+
+<!-- AI PAGE -->
 
 <section id="ai" class="hidden">
+
 <div class="card">
+
  <h3>🤖 AI Saathi</h3>
- <p>आप अपना सवाल लिखें और AI Saathi से practical सलाह लें।</p>
- <textarea id="question2" placeholder="अपना सवाल लिखें..."></textarea>
- <button onclick="ask2()">AI से पूछें</button>
+
+ <p>
+  अपना सवाल लिखें और AI Saathi से practical सलाह लें।
+ </p>
+
+ <textarea
+  id="question2"
+  placeholder="जैसे: मुझे job पाने के लिए क्या करना चाहिए?"
+ ></textarea>
+
+ <br><br>
+
+ <button onclick="ask2()">
+  🤖 AI से पूछें
+ </button>
+
 </div>
+
 </section>
 
+
+<!-- PROFILE -->
+
 <section id="profile" class="hidden">
+
 <div class="card">
+
  <h3>👤 आपका Profile</h3>
 
  <label>नाम</label>
- <input id="name">
+ <input id="name" placeholder="अपना नाम लिखें">
 
  <br><br>
+
  <label>काम / Role</label>
+
  <select id="role">
+
   <option>Student</option>
   <option>Farmer</option>
   <option>Job Seeker</option>
   <option>Freelancer</option>
   <option>Business</option>
+
  </select>
 
  <br><br>
+
  <label>दैनिक earning लक्ष्य ₹</label>
- <input id="goal" type="number">
+
+ <input
+  id="goal"
+  type="number"
+  min="0"
+  placeholder="500"
+ >
 
  <br><br>
+
  <label>आज उपलब्ध समय (घंटे)</label>
- <input id="hours" type="number">
+
+ <input
+  id="hours"
+  type="number"
+  min="1"
+  placeholder="3"
+ >
 
  <br><br>
- <button onclick="save()">💾 Save Profile</button>
+
+ <button
+  onclick="save()"
+  style="width:100%">
+  💾 Save Profile
+ </button>
+
 </div>
+
 </section>
 
 </main>
 
+
+<!-- BOTTOM NAV -->
+
 <nav>
- <button id="navHome" class="active" onclick="show('home',this)">🏠 Home</button>
- <button id="navAI" onclick="show('ai',this)">🤖 AI Saathi</button>
- <button id="navProfile" onclick="show('profile',this)">👤 Profile</button>
+
+ <button
+  id="navHome"
+  class="active"
+  onclick="show('home',this)">
+  🏠 Home
+ </button>
+
+ <button
+  id="navAI"
+  onclick="show('ai',this)">
+  🤖 AI Saathi
+ </button>
+
+ <button
+  id="navProfile"
+  onclick="show('profile',this)">
+  👤 Profile
+ </button>
+
 </nav>
 
 </div>
 
+
 <script>
+
 const KEY="AISAATHI_V5";
 
-let d=JSON.parse(localStorage.getItem(KEY)||"null")||{
- name:"Sonu Singh",
- role:"Job Seeker",
- goal:500,
- hours:3,
- greeting:"नमस्ते Sonu Singh 👋",
- done:[false,false,false],
- streak:1,
- history:[]
-};
+let d =
+ JSON.parse(localStorage.getItem(KEY)||"null")
+ || {
+   name:"Sonu Singh",
+   role:"Job Seeker",
+   goal:500,
+   hours:3,
+   greeting:"नमस्ते Sonu Singh 👋",
+   done:[false,false,false],
+   streak:1,
+   lastDate:"",
+   history:[]
+ };
+
+
+/* MISSIONS */
 
 function missionsFor(role){
- if(role==="Student") return [
-  "30 मिनट focused study करें",
-  "एक नया skill/topic सीखें",
-  "आज का revision पूरा करें"
- ];
- if(role==="Farmer") return [
-  "फसल/खेत की स्थिति check करें",
-  "आज का जरूरी कृषि काम पूरा करें",
-  "बाजार भाव या बिक्री की जानकारी देखें"
- ];
- if(role==="Job Seeker") return [
-  "30 मिनट Skill practice करें",
-  "2 relevant jobs खोजें",
-  "कम-से-कम 1 application भेजें"
- ];
- if(role==="Freelancer") return [
-  "एक जरूरी client task पूरा करें",
-  "नया client/project खोजें",
-  "आज एक proposal/message भेजें"
- ];
- if(role==="Business") return [
-  "आज के जरूरी orders check करें",
-  "2 नए customers से संपर्क करें",
-  "आज की sales/earning review करें"
- ];
+
+ if(role==="Student"){
+  return [
+   "30 मिनट focused study करें",
+   "एक नया skill/topic सीखें",
+   "आज का revision पूरा करें"
+  ];
+ }
+
+ if(role==="Farmer"){
+  return [
+   "फसल/खेत की स्थिति check करें",
+   "आज का जरूरी कृषि काम पूरा करें",
+   "बाजार भाव या बिक्री की जानकारी देखें"
+  ];
+ }
+
+ if(role==="Job Seeker"){
+  return [
+   "30 मिनट Skill practice करें",
+   "2 relevant jobs खोजें",
+   "कम-से-कम 1 application भेजें"
+  ];
+ }
+
+ if(role==="Freelancer"){
+  return [
+   "एक जरूरी client task पूरा करें",
+   "नया client/project खोजें",
+   "आज एक proposal/message भेजें"
+  ];
+ }
+
+ if(role==="Business"){
+  return [
+   "आज के जरूरी orders check करें",
+   "2 नए customers से संपर्क करें",
+   "आज की sales/earning review करें"
+  ];
+ }
+
  return [
   "आज के 3 सबसे जरूरी काम तय करें",
   "एक earning opportunity खोजें",
@@ -254,242 +631,647 @@ function missionsFor(role){
  ];
 }
 
+
+/* DATE */
+
+function today(){
+
+ const now=new Date();
+
+ return now.getFullYear()+"-"+
+  String(now.getMonth()+1).padStart(2,"0")+"-"+
+  String(now.getDate()).padStart(2,"0");
+
+}
+
+
+/* DAILY RESET */
+
+function checkNewDay(){
+
+ const t=today();
+
+ if(!d.lastDate){
+
+  d.lastDate=t;
+
+ }
+
+ else if(d.lastDate!==t){
+
+  const yesterday=new Date();
+
+  yesterday.setDate(yesterday.getDate()-1);
+
+  const y=
+   yesterday.getFullYear()+"-"+
+   String(yesterday.getMonth()+1).padStart(2,"0")+"-"+
+   String(yesterday.getDate()).padStart(2,"0");
+
+  const completedYesterday=
+   d.done && d.done.every(Boolean);
+
+  if(completedYesterday){
+   d.streak=(d.streak||1)+1;
+  }
+  else if(d.lastDate!==y){
+   d.streak=1;
+  }
+
+  d.done=[false,false,false];
+
+  d.lastDate=t;
+
+ }
+
+}
+
+
+/* RENDER */
+
 function render(){
+
+ checkNewDay();
+
  document.getElementById("greet").textContent=
   d.greeting || ("नमस्ते "+d.name+" 👋");
+
 
  document.getElementById("goalShow").textContent=
   Number(d.goal||0).toLocaleString("en-IN");
 
+
  document.getElementById("hoursShow").textContent=
   (d.hours||0)+"h";
 
- document.getElementById("roleShow").textContent=
-  d.role==="Job Seeker"?"Job":d.role;
 
- document.getElementById("streak").textContent="🔥 "+(d.streak||1);
+ document.getElementById("roleShow").textContent=
+  d.role==="Job Seeker" ? "Job" : d.role;
+
+
+ document.getElementById("streak").textContent=
+  "🔥 "+(d.streak||1);
+
+
+ document.getElementById("streakBig").textContent=
+  "🔥 "+(d.streak||1)+" दिन";
+
 
  const m=missionsFor(d.role);
+
  d.done=d.done||[false,false,false];
 
- const completed=d.done.filter(Boolean).length;
- const p=Math.round(completed/3*100);
 
- document.getElementById("percent").textContent=p+"%";
- document.getElementById("bar").style.width=p+"%";
+ while(d.done.length<3){
+  d.done.push(false);
+ }
 
- document.getElementById("missions").innerHTML=m.map((x,i)=>`
-  <label class="mission ${d.done[i]?'done':''}">
-   <input type="checkbox"
-    ${d.done[i]?'checked':''}
-    onchange="toggle(${i})">
-   <span>${i+1}. ${x}</span>
-  </label>
- `).join("");
+
+ const completed=
+  d.done.filter(Boolean).length;
+
+
+ const p=
+  Math.round(completed/3*100);
+
+
+ document.getElementById("percent").textContent=
+  p+"%";
+
+
+ document.getElementById("bar").style.width=
+  p+"%";
+
+
+ /* MISSIONS */
+
+ document.getElementById("missions").innerHTML=
+  m.map((x,i)=>`
+
+   <label class="mission ${d.done[i]?'done':''}">
+
+    <input
+     type="checkbox"
+     ${d.done[i]?'checked':''}
+     onchange="toggle(${i})"
+    >
+
+    <span>
+     ${i+1}. ${escapeHTML(x)}
+    </span>
+
+   </label>
+
+  `).join("");
+
+
+ if(completed===3){
+
+  document.getElementById("missionStatus").textContent=
+   "🎉 बहुत बढ़िया! आज के सभी missions पूरे हो गए।";
+
+ }
+ else{
+
+  document.getElementById("missionStatus").textContent=
+   completed+" / 3 missions पूरे हुए।";
+
+ }
+
+
+ /* SMART PLAN */
 
  document.getElementById("smartPlan").innerHTML=`
-  <p>🎯 Target: <b>₹${Number(d.goal||0).toLocaleString("en-IN")}</b></p>
-  <p>⏰ Available time: <b>${d.hours||0} घंटे</b></p>
-  <p>💼 Role: <b>${d.role}</b></p>
-  <p>🚀 आज पहले mission पूरा करें, फिर अगला step लें।</p>
+
+  <div class="planItem">
+   🎯 Target:
+   <b>₹${Number(d.goal||0).toLocaleString("en-IN")}</b>
+  </div>
+
+  <div class="planItem">
+   ⏰ Available:
+   <b>${d.hours||0} घंटे</b>
+  </div>
+
+  <div class="planItem">
+   💼 Role:
+   <b>${escapeHTML(d.role)}</b>
+  </div>
+
+  <div class="planItem">
+   🚀 पहला काम:
+   <b>${escapeHTML(m[0])}</b>
+  </div>
+
+  <div class="planItem">
+   📈 Progress:
+   <b>${p}%</b>
+  </div>
+
  `;
 
- document.getElementById("name").value=d.name||"";
- document.getElementById("role").value=d.role||"Job Seeker";
- document.getElementById("goal").value=d.goal||500;
- document.getElementById("hours").value=d.hours||3;
 
- localStorage.setItem(KEY,JSON.stringify(d));
+ /* PROFILE */
+
+ document.getElementById("name").value=
+  d.name||"";
+
+ document.getElementById("role").value=
+  d.role||"Job Seeker";
+
+ document.getElementById("goal").value=
+  d.goal||500;
+
+ document.getElementById("hours").value=
+  d.hours||3;
+
+
+ localStorage.setItem(
+  KEY,
+  JSON.stringify(d)
+ );
+
 }
+
+
+/* TOGGLE MISSION */
 
 function toggle(i){
+
  d.done[i]=!d.done[i];
+
  render();
+
 }
+
+
+/* SAVE PROFILE */
 
 function save(){
- d.name=document.getElementById("name").value.trim()||"दोस्त";
- d.role=document.getElementById("role").value;
- d.goal=Number(document.getElementById("goal").value)||500;
- d.hours=Number(document.getElementById("hours").value)||3;
- d.greeting="नमस्ते "+d.name+" 👋";
- d.done=[false,false,false];
+
+ d.name=
+  document.getElementById("name").value.trim()
+  ||"दोस्त";
+
+ d.role=
+  document.getElementById("role").value;
+
+ d.goal=
+  Number(document.getElementById("goal").value)
+  ||500;
+
+ d.hours=
+  Number(document.getElementById("hours").value)
+  ||3;
+
+ d.greeting=
+  "नमस्ते "+d.name+" 👋";
+
+ d.done=[
+  false,
+  false,
+  false
+ ];
+
+ d.lastDate=today();
+
+ localStorage.setItem(
+  KEY,
+  JSON.stringify(d)
+ );
 
  render();
- alert("Profile और आज का Plan save हो गया ✅");
- show("home",document.getElementById("navHome"));
+
+ alert(
+  "Profile और आज का Plan save हो गया ✅"
+ );
+
+ show(
+  "home",
+  document.getElementById("navHome")
+ );
+
 }
+
+
+/* REFRESH PLAN */
 
 function refreshPlan(){
- d.done=[false,false,false];
+
  render();
+
  document.getElementById("status").textContent=
-  "आज का नया Smart Plan तैयार है ✅";
+  "आज का Smart Plan refresh हो गया ✅";
+
 }
+
+
+/* NAVIGATION */
 
 function show(id,btn){
- ["home","ai","profile"].forEach(x=>{
-  document.getElementById(x).classList.add("hidden");
+
+ [
+  "home",
+  "ai",
+  "profile"
+ ].forEach(x=>{
+  document
+   .getElementById(x)
+   .classList.add("hidden");
  });
- document.getElementById(id).classList.remove("hidden");
 
- document.querySelectorAll("nav button").forEach(x=>
-  x.classList.remove("active")
- );
- if(btn)btn.classList.add("active");
-}
 
-async function ask(){
- const q=document.getElementById("question").value.trim();
- if(!q)return;
+ document
+  .getElementById(id)
+  .classList.remove("hidden");
 
- await sendQuestion(q,"question");
-}
 
-async function ask2(){
- const q=document.getElementById("question2").value.trim();
- if(!q)return;
-
- show("home",document.getElementById("navHome"));
- document.getElementById("question").value=q;
- await sendQuestion(q,"question");
-}
-
-async function sendQuestion(q,inputId){
- const chat=document.getElementById("chat");
-
- chat.innerHTML+=`
-  <div class="msg user">${escapeHTML(q)}</div>
- `;
-
- document.getElementById(inputId).value="";
- document.getElementById("status").textContent=
-  "AI Saathi सोच रहा है…";
-
- try{
-  const response=await fetch("/api/chat",{
-   method:"POST",
-   headers:{"Content-Type":"application/json"},
-   body:JSON.stringify({
-    message:q,
-    profile:{
-     name:d.name,
-     role:d.role,
-     goal:d.goal,
-     hours:d.hours,
-     progress:d.done.filter(Boolean).length*33
-    },
-    history:d.history.slice(-8)
-   })
+ document
+  .querySelectorAll("nav button")
+  .forEach(x=>{
+   x.classList.remove("active");
   });
 
-  const data=await response.json();
 
-  if(!response.ok)throw new Error("AI service unavailable");
-
-  const answer=data.answer||"अभी जवाब नहीं मिल पाया।";
-
-  chat.innerHTML+=`
-   <div class="msg ai">${escapeHTML(answer).replace(/\n/g,"<br>")}</div>
-  `;
-
-  d.history.push({role:"user",content:q});
-  d.history.push({role:"assistant",content:answer});
-  localStorage.setItem(KEY,JSON.stringify(d));
-
-  document.getElementById("status").textContent=
-   "AI Saathi तैयार है ✅";
-
-  chat.scrollTop=chat.scrollHeight;
-
- }catch(e){
-  const fallback=
-   "समझ गया "+(d.name||"दोस्त")+"। पहले आज का सबसे जरूरी काम पूरा करें। फिर अगला step लेते हैं।";
-
-  chat.innerHTML+=`
-   <div class="msg ai">${fallback}</div>
-  `;
-
-  document.getElementById("status").textContent=
-   "Offline fallback mode";
+ if(btn){
+  btn.classList.add("active");
  }
+
 }
 
+
+/* AI QUESTION */
+
+async function ask(){
+
+ const q=
+  document
+   .getElementById("question")
+   .value
+   .trim();
+
+ if(!q)return;
+
+ await sendQuestion(q,"question");
+
+}
+
+
+/* AI PAGE QUESTION */
+
+async function ask2(){
+
+ const q=
+  document
+   .getElementById("question2")
+   .value
+   .trim();
+
+ if(!q)return;
+
+ show(
+  "home",
+  document.getElementById("navHome")
+ );
+
+ document.getElementById("question").value=q;
+
+ await sendQuestion(q,"question");
+
+}
+
+
+/* SEND TO SERVER */
+
+async function sendQuestion(q,inputId){
+
+ const chat=
+  document.getElementById("chat");
+
+ chat.innerHTML+=`
+
+  <div class="msg user">
+   ${escapeHTML(q)}
+  </div>
+
+ `;
+
+
+ document.getElementById(inputId).value="";
+
+
+ const status=
+  document.getElementById("status");
+
+
+ status.textContent=
+  "AI Saathi सोच रहा है…";
+
+ status.classList.add("loading");
+
+
+ try{
+
+  const response=
+   await fetch("/api/chat",{
+
+    method:"POST",
+
+    headers:{
+     "Content-Type":
+      "application/json"
+    },
+
+    body:JSON.stringify({
+
+     message:q,
+
+     profile:{
+      name:d.name,
+      role:d.role,
+      goal:d.goal,
+      hours:d.hours,
+      progress:
+       Math.round(
+        d.done.filter(Boolean).length
+        /3*100
+       )
+     },
+
+     history:
+      d.history.slice(-8)
+
+    })
+
+   });
+
+
+  const data=
+   await response.json();
+
+
+  if(!response.ok){
+
+   throw new Error(
+    data.error||"AI service unavailable"
+   );
+
+  }
+
+
+  const answer=
+   data.answer||
+   "अभी जवाब नहीं मिल पाया।";
+
+
+  chat.innerHTML+=`
+
+   <div class="msg ai">
+    ${escapeHTML(answer)
+      .replace(/\n/g,"<br>")}
+   </div>
+
+  `;
+
+
+  d.history.push(
+   {
+    role:"user",
+    content:q
+   },
+   {
+    role:"assistant",
+    content:answer
+   }
+  );
+
+
+  d.history=
+   d.history.slice(-20);
+
+
+  localStorage.setItem(
+   KEY,
+   JSON.stringify(d)
+  );
+
+
+  parsePlan(answer);
+
+  render();
+
+
+  status.textContent=
+   "AI Saathi online ✅";
+
+  status.classList.remove("loading");
+
+
+  chat.scrollTop=
+   chat.scrollHeight;
+
+
+ }
+
+ catch(e){
+
+  const fallback=
+   "समझ गया "+(d.name||"दोस्त")+
+   "। आपके पास "+d.hours+
+   " घंटे हैं और आपका target ₹"+
+   d.goal+
+   " है। पहले अपना सबसे जरूरी mission पूरा करें, फिर अगला step लें।";
+
+
+  chat.innerHTML+=`
+
+   <div class="msg ai">
+    ${fallback}
+   </div>
+
+  `;
+
+
+  status.textContent=
+   "Offline fallback mode";
+
+
+  status.classList.remove("loading");
+
+ }
+
+}
+
+
+/* AI RESPONSE से PLAN */
+
+function parsePlan(t){
+
+ const money=
+  t.match(/₹\s*([\d,]+)/);
+
+ if(money){
+
+  d.goal=
+   Number(
+    money[1].replace(/,/g,"")
+   );
+
+ }
+
+
+ const hours=
+  t.match(
+   /(\d+(?:\.\d+)?)\s*(?:घंटे|घंटा|hours?|hrs?|hr|h)/i
+  );
+
+ if(hours){
+
+  d.hours=
+   Number(hours[1]);
+
+ }
+
+}
+
+
+/* ESCAPE HTML */
+
 function escapeHTML(s){
+
  return String(s)
   .replaceAll("&","&amp;")
   .replaceAll("<","&lt;")
   .replaceAll(">","&gt;")
   .replaceAll('"',"&quot;")
   .replaceAll("'","&#039;");
+
 }
+
+
+/* VOICE */
 
 function speak(){
+
+ const m=
+  missionsFor(d.role);
+
  const text=
-  "नमस्ते "+d.name+"। आपका आज का लक्ष्य "+d.goal+
-  " रुपये है। आपके पास "+d.hours+
-  " घंटे हैं। आज अपने तीन missions पूरे करें।";
+  "नमस्ते "+d.name+
+  "। आज आपका लक्ष्य "+
+  d.goal+
+  " रुपये है। आपके पास "+
+  d.hours+
+  " घंटे हैं। "+
+  m.join(". ")+
+  "।";
+
 
  speakText(text);
+
 }
+
+
+/* TEXT TO SPEECH */
 
 function speakText(text){
+
  if(!("speechSynthesis" in window)){
-  alert("आपके फोन में voice सुविधा उपलब्ध नहीं है।");
+
+  alert(
+   "आपके फोन में voice सुविधा उपलब्ध नहीं है।"
+  );
+
   return;
+
  }
 
- const u=new SpeechSynthesisUtterance(text);
+
+ const u=
+  new SpeechSynthesisUtterance(text);
+
  u.lang="hi-IN";
+
  u.rate=.95;
+
  speechSynthesis.cancel();
+
  speechSynthesis.speak(u);
+
 }
+
+
+/* CLEAR CHAT */
+
+function clearChat(){
+
+ document.getElementById("chat").innerHTML=`
+
+  <div class="msg ai">
+   ठीक है 😊 फिर से शुरू करते हैं।
+   अपना सवाल बताइए।
+  </div>
+
+ `;
+
+ d.history=[];
+
+ localStorage.setItem(
+  KEY,
+  JSON.stringify(d)
+ );
+
+ document.getElementById("status").textContent=
+  "Chat साफ हो गई। AI Saathi तैयार है।";
+
+}
+
+
+/* START */
 
 render();
+
 </script>
 
-</body>
-</html> missions.innerHTML=m.map((x,i)=>`<div class="mission ${d.done[i]?'done':''}"><input type="checkbox" ${d.done[i]?'checked':''} onchange="toggle(${i})"><div>${x}</div></div>`).join("");
- let p=Math.round(d.done.filter(Boolean).length/3*100);percent.textContent=p+"%";bar.style.width=p+"%";
- smartPlan.innerHTML=`<p><b>🎯 Target:</b> ₹${Number(d.goal).toLocaleString("en-IN")} / दिन</p><p><b>⏱️ Time:</b> ${d.hours} घंटे</p>`+
- m.map((x,i)=>`<p><b>${i+1}.</b> ${x}</p>`).join("")+`<p><b>📈 Progress:</b> ${p}%</p>`;
- name.value=d.name;role.value=d.role;greeting.value=d.greeting;goal.value=d.goal;hours.value=d.hours;
- localStorage.setItem(K,JSON.stringify(d));
-}
-function toggle(i){d.done[i]=!d.done[i];render()}
-function save(){d.name=name.value.trim()||"दोस्त";d.role=role.value;d.greeting=greeting.value;d.goal=Number(goal.value)||0;d.hours=Number(hours.value)||1;d.done=[false,false,false];render();show("home",document.querySelector("nav button"));alert("Profile save हो गई ✅")}
-function refreshPlan(){render();show("ai",document.querySelectorAll("nav button")[1])}
-function show(id,b){["home","ai","profile"].forEach(x=>document.getElementById(x).classList.add("hidden"));document.getElementById(id).classList.remove("hidden");document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active")}
-function escapeHTML(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
-function strip(s){let e=document.createElement("div");e.innerHTML=s;return e.textContent||e.innerText||""}
-
-async function ask(){
- const q=question.value.trim();if(!q)return;
- chat.innerHTML+=`<div class="msg user">${escapeHTML(q)}</div>`;question.value="";
- status.textContent="AI Saathi सोच रहा है…";status.classList.add("loading");
- const context={name:d.name,role:d.role,goal:d.goal,hours:d.hours,done:d.done};
- try{
-  const r=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},
-   body:JSON.stringify({message:q,profile:context,history:d.history.slice(-8)})});
-  const data=await r.json();if(!r.ok)throw new Error(data.error||"API error");
-  const answer=data.answer||"माफ कीजिए, अभी जवाब नहीं मिला।";
-  chat.innerHTML+=`<div class="msg ai">${answer}</div>`;
-  d.history.push({role:"user",content:q},{role:"assistant",content:strip(answer)});d.history=d.history.slice(-20);
-  parsePlan(answer);render();speakText(strip(answer));status.textContent="AI Saathi online ✅";
- }catch(e){
-  const fallback=`समझ गया ${d.name||"दोस्त"}। आपके पास ${d.hours} घंटे हैं और target ₹${d.goal} है। पहले अपना सबसे जरूरी काम पूरा करें, फिर दूसरा mission करें। अगर आपने API server शुरू नहीं किया है तो V4 का server चालू करें।`;
-  chat.innerHTML+=`<div class="msg ai">${fallback}</div>`;status.textContent="Offline fallback mode";
- }
-}
-function parsePlan(t){
- let m=t.match(/₹\s*([\d,]+)/);if(m)d.goal=Number(m[1].replace(/,/g,""));
- let h=t.match(/(\d+(?:\.\d+)?)\s*(?:घंटे|घंटा|hours?|hrs?|hr|h)/i);if(h)d.hours=Number(h[1]);
-}
-function speak(){speakText(`${d.greeting} ${d.name||"दोस्त"}। आज आपका लक्ष्य ${d.goal} रुपये है और आपके पास ${d.hours} घंटे हैं। ${missionsFor(d.role).join(". ")}`)}
-function speakText(text){if(!("speechSynthesis"in window)){alert("Voice support उपलब्ध नहीं है");return}let u=new SpeechSynthesisUtterance(text);u.lang="hi-IN";u.rate=.95;speechSynthesis.cancel();speechSynthesis.speak(u)}
-function clearChat(){chat.innerHTML='<div class="msg ai">ठीक है 😊 फिर से शुरू करते हैं। अपना सवाल बताइए।</div>';d.history=[];localStorage.setItem(K,JSON.stringify(d))}
-render();
-</script>
 </body>
 </html>
