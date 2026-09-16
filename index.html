@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0f766e">
+<title>AI Saathi V4</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eef5f3;color:#17302d;font-family:Arial,sans-serif}
+.app{max-width:500px;margin:auto;background:#fff;min-height:100vh}
+header{background:#0f766e;color:#fff;padding:22px 18px;border-radius:0 0 25px 25px}
+h1{margin:6px 0;font-size:29px}.sub{font-size:16px;opacity:.92}
+main{padding:16px 16px 82px}.card{border:1px solid #d9e7e3;background:#fbfdfc;border-radius:19px;padding:16px;margin:12px 0}
+label{display:block;font-weight:bold;margin:10px 0 6px}
+input,select,textarea,button{width:100%;padding:13px;border-radius:12px;border:1px solid #c9d9d5;font-size:16px}
+textarea{min-height:90px;resize:vertical}button{background:#0f766e;color:#fff;border:0;font-weight:bold;margin-top:10px}
+button.secondary{background:#e6f3f0;color:#0f766e}.target{font-size:32px;font-weight:800;color:#0f766e}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.stat{background:#eef8f5;border-radius:14px;padding:12px}.stat b{display:block;font-size:20px}
+.mission{display:flex;gap:10px;padding:12px 0;border-bottom:1px solid #e2ebe9}.mission input{width:22px;height:22px;margin-top:2px}.mission.done div{text-decoration:line-through;opacity:.55}
+.chat{display:flex;flex-direction:column;gap:9px}.msg{padding:12px;border-radius:15px;line-height:1.5}.ai{background:#e6f3f0}.user{background:#0f766e;color:#fff;align-self:flex-end;max-width:90%}
+.pill{display:inline-block;background:#dff2ed;color:#0f766e;padding:6px 10px;border-radius:20px;font-weight:bold}.small{font-size:13px;color:#667673}
+.hidden{display:none}.progress{height:12px;background:#e2ebe9;border-radius:20px;overflow:hidden;margin:10px 0}.progress>div{height:100%;background:#0f766e;width:0%;transition:.3s}
+.row{display:flex;gap:8px}.row button{flex:1}nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);max-width:500px;width:100%;display:flex;background:#fff;border-top:1px solid #ddd;padding:7px;z-index:3}
+nav button{margin:0;background:#fff;color:#203532;font-size:13px}nav button.active{color:#0f766e}.badge{font-size:12px;background:#fff;color:#0f766e;padding:4px 7px;border-radius:10px;font-weight:bold}
+.status{font-size:12px;margin-top:8px;color:#667673}.loading{opacity:.65}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div id="greet"></div><h1>AI Saathi 🤖 <span class="badge">V4</span></h1><div id="hello" class="sub"></div></header>
+<main>
+<section id="home">
+<div class="card"><span class="pill">आज का लक्ष्य</span><h2>नमस्ते! 👋</h2>
+<div class="target">₹<span id="goalShow"></span></div>
+<div class="small">समय: <span id="hoursShow"></span> घंटे • Role: <span id="roleShow"></span></div>
+<div class="stats"><div class="stat">⏱️ समय<b id="timeLeft">--</b></div><div class="stat">🎯 Progress<b id="percent">0%</b></div></div>
+<div class="progress"><div id="bar"></div></div></div>
+
+<div class="card"><h3>📋 आज के 3 मिशन</h3><div id="missions"></div>
+<div class="row"><button onclick="speak()">🔊 सुनें</button><button class="secondary" onclick="refreshPlan()">🎯 Plan Refresh</button></div></div>
+
+<div class="card"><h3>💬 AI Saathi से बात करें</h3><div id="chat" class="chat">
+<div class="msg ai">नमस्ते! 🙏 मैं आपका AI Saathi हूँ। Hindi या Hinglish में बताइए—आज आपके पास कितना समय है और earning target कितना है?</div></div>
+<textarea id="question" placeholder="जैसे: आज मेरे पास 3 घंटे हैं और मुझे ₹500 कमाने हैं"></textarea>
+<div class="row"><button onclick="ask()">🤖 AI से पूछें</button><button class="secondary" onclick="clearChat()">Clear</button></div>
+<div id="status" class="status">AI mode तैयार है।</div></div>
+</section>
+
+<section id="ai" class="hidden"><div class="card"><h2>🤖 Smart Plan</h2><div id="smartPlan"></div></div></section>
+
+<section id="profile" class="hidden"><div class="card"><h2>👤 मेरी प्रोफाइल</h2>
+<label>नाम</label><input id="name"><label>आप क्या करते हैं?</label>
+<select id="role"><option>Student</option><option>Farmer</option><option>Job Seeker</option><option>Freelancer</option><option>Business Owner</option></select>
+<label>अभिवादन</label><select id="greeting"><option>नमस्ते 🙏</option><option>जय श्री राम 🙏</option><option>सत श्री अकाल 🙏</option><option>Good Morning ☀️</option></select>
+<label>दैनिक earning लक्ष्य ₹</label><input id="goal" type="number" min="0">
+<label>आज उपलब्ध समय (घंटे)</label><input id="hours" type="number" min="1" step="0.5">
+<button onclick="save()">Save Profile</button></div></section>
+</main>
+<nav><button class="active" onclick="show('home',this)">🏠 Home</button><button onclick="show('ai',this)">🤖 AI Saathi</button><button onclick="show('profile',this)">👤 Profile</button></nav>
+</div>
+
+<script>
+const K="AISV4";
+let d=JSON.parse(localStorage.getItem(K)||"null")||{name:"Sonu Singh",role:"Job Seeker",greeting:"जय श्री राम 🙏",goal:500,hours:3,done:[false,false,false],history:[]};
+
+function missionsFor(r){
+ if(r==="Student")return["30 मिनट focused study करें","10–20 MCQ solve करें","गलत सवालों की revision करें"];
+ if(r==="Farmer")return["फसल/खेत की स्थिति check करें","पानी और कीट/रोग की जाँच करें","आज का खर्च और अगला काम note करें"];
+ if(r==="Job Seeker")return["30 मिनट skill practice करें","2 relevant jobs खोजें","कम-से-कम 1 application भेजें"];
+ if(r==="Freelancer")return["सबसे जरूरी client task पूरा करें","1 नए client को proposal भेजें","Payment/follow-up update करें"];
+ return["आज के 3 सबसे जरूरी काम तय करें","Sales/काम का target पूरा करें","खर्च और profit note करें"];
+}
+function render(){
+ greet.textContent=d.greeting;hello.textContent=(d.name?d.name+" के लिए ":"")+"आपका Personal Daily AI Companion";
+ goalShow.textContent=Number(d.goal).toLocaleString("en-IN");hoursShow.textContent=d.hours;
+ timeLeft.textContent=d.hours+"h";roleShow.textContent=d.role;
+ let m=missionsFor(d.role);
+ missions.innerHTML=m.map((x,i)=>`<div class="mission ${d.done[i]?'done':''}"><input type="checkbox" ${d.done[i]?'checked':''} onchange="toggle(${i})"><div>${x}</div></div>`).join("");
+ let p=Math.round(d.done.filter(Boolean).length/3*100);percent.textContent=p+"%";bar.style.width=p+"%";
+ smartPlan.innerHTML=`<p><b>🎯 Target:</b> ₹${Number(d.goal).toLocaleString("en-IN")} / दिन</p><p><b>⏱️ Time:</b> ${d.hours} घंटे</p>`+
+ m.map((x,i)=>`<p><b>${i+1}.</b> ${x}</p>`).join("")+`<p><b>📈 Progress:</b> ${p}%</p>`;
+ name.value=d.name;role.value=d.role;greeting.value=d.greeting;goal.value=d.goal;hours.value=d.hours;
+ localStorage.setItem(K,JSON.stringify(d));
+}
+function toggle(i){d.done[i]=!d.done[i];render()}
+function save(){d.name=name.value.trim()||"दोस्त";d.role=role.value;d.greeting=greeting.value;d.goal=Number(goal.value)||0;d.hours=Number(hours.value)||1;d.done=[false,false,false];render();show("home",document.querySelector("nav button"));alert("Profile save हो गई ✅")}
+function refreshPlan(){render();show("ai",document.querySelectorAll("nav button")[1])}
+function show(id,b){["home","ai","profile"].forEach(x=>document.getElementById(x).classList.add("hidden"));document.getElementById(id).classList.remove("hidden");document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active")}
+function escapeHTML(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+function strip(s){let e=document.createElement("div");e.innerHTML=s;return e.textContent||e.innerText||""}
+
+async function ask(){
+ const q=question.value.trim();if(!q)return;
+ chat.innerHTML+=`<div class="msg user">${escapeHTML(q)}</div>`;question.value="";
+ status.textContent="AI Saathi सोच रहा है…";status.classList.add("loading");
+ const context={name:d.name,role:d.role,goal:d.goal,hours:d.hours,done:d.done};
+ try{
+  const r=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({message:q,profile:context,history:d.history.slice(-8)})});
+  const data=await r.json();if(!r.ok)throw new Error(data.error||"API error");
+  const answer=data.answer||"माफ कीजिए, अभी जवाब नहीं मिला।";
+  chat.innerHTML+=`<div class="msg ai">${answer}</div>`;
+  d.history.push({role:"user",content:q},{role:"assistant",content:strip(answer)});d.history=d.history.slice(-20);
+  parsePlan(answer);render();speakText(strip(answer));status.textContent="AI Saathi online ✅";
+ }catch(e){
+  const fallback=`समझ गया ${d.name||"दोस्त"}। आपके पास ${d.hours} घंटे हैं और target ₹${d.goal} है। पहले अपना सबसे जरूरी काम पूरा करें, फिर दूसरा mission करें। अगर आपने API server शुरू नहीं किया है तो V4 का server चालू करें।`;
+  chat.innerHTML+=`<div class="msg ai">${fallback}</div>`;status.textContent="Offline fallback mode";
+ }
+}
+function parsePlan(t){
+ let m=t.match(/₹\s*([\d,]+)/);if(m)d.goal=Number(m[1].replace(/,/g,""));
+ let h=t.match(/(\d+(?:\.\d+)?)\s*(?:घंटे|घंटा|hours?|hrs?|hr|h)/i);if(h)d.hours=Number(h[1]);
+}
+function speak(){speakText(`${d.greeting} ${d.name||"दोस्त"}। आज आपका लक्ष्य ${d.goal} रुपये है और आपके पास ${d.hours} घंटे हैं। ${missionsFor(d.role).join(". ")}`)}
+function speakText(text){if(!("speechSynthesis"in window)){alert("Voice support उपलब्ध नहीं है");return}let u=new SpeechSynthesisUtterance(text);u.lang="hi-IN";u.rate=.95;speechSynthesis.cancel();speechSynthesis.speak(u)}
+function clearChat(){chat.innerHTML='<div class="msg ai">ठीक है 😊 फिर से शुरू करते हैं। अपना सवाल बताइए।</div>';d.history=[];localStorage.setItem(K,JSON.stringify(d))}
+render();
+</script>
+</body>
+</html>
